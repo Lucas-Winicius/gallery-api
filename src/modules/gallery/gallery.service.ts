@@ -27,8 +27,8 @@ export class GalleryService {
     return await this.prisma.photo.findMany();
   }
 
-  async findOne(data: { id: string; url: string; name: string }) {
-    const photo = await this.prisma.photo.findFirst({ where: data });
+  async findOne(id: string) {
+    const photo = await this.prisma.photo.findFirst({ where: { id } });
 
     if (!photo) throw new NotFoundException('Photo not found');
 

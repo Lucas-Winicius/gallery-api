@@ -27,16 +27,16 @@ export class GalleryController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.galleryService.findOne(+id);
+    return this.galleryService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateGalleryDto: UpdateGalleryDto) {
-    return this.galleryService.update(+id, updateGalleryDto);
+    return this.galleryService.update(id, updateGalleryDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.galleryService.remove(+id);
+    return this.galleryService.remove(id);
   }
 }
