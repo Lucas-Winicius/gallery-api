@@ -16,6 +16,8 @@ model Photo {
   description String
   url         String   @unique
   tags        String[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("photos")
 }
