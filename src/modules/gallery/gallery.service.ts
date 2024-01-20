@@ -24,7 +24,9 @@ export class GalleryService {
   }
 
   async findAll() {
-    return await this.prisma.photo.findMany();
+    return await this.prisma.photo.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
   }
 
   async findOne(id: string) {
