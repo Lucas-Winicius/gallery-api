@@ -71,7 +71,7 @@ export class GalleryService {
   }
 
   async search(term: string) {
-    const results = this.prisma.photo.findMany({
+    const results = await this.prisma.photo.findMany({
       where: {
         OR: [
           { id: { contains: term, mode: 'insensitive' } },
@@ -81,8 +81,6 @@ export class GalleryService {
         ],
       },
     });
-
-    if (!results) throw new NotFoundException("We didn't find what you want");
 
     return results;
   }

@@ -24,6 +24,11 @@ export class GalleryController {
     return this.galleryService.create(createGalleryDto);
   }
 
+  @Get('search')
+  search(@Query('q') q: string) {
+    return this.galleryService.search(q);
+  }
+
   @Get()
   findAll() {
     return this.galleryService.findAll();
@@ -44,10 +49,5 @@ export class GalleryController {
   @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
     return this.galleryService.remove(id);
-  }
-
-  @Get('search')
-  search(@Query('q') q: string) {
-    return this.galleryService.search(q);
   }
 }
