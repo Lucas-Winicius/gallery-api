@@ -7,6 +7,7 @@ import {
   Delete,
   UseGuards,
   Put,
+  Query,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
@@ -43,5 +44,10 @@ export class GalleryController {
   @UseGuards(AuthGuard)
   remove(@Param('id') id: string) {
     return this.galleryService.remove(id);
+  }
+
+  @Get('search')
+  search(@Query('q') q: string) {
+    return this.galleryService.search(q);
   }
 }

@@ -69,4 +69,21 @@ export class GalleryService {
       }
     }
   }
+
+  async search(term: string) {
+    const results = this.prisma.photo.findMany({
+      where: {
+        OR: [
+          { id: { contains: term, mode: 'insensitive' } },
+          { name: { contains: term, mode: 'insensitive' } },
+          { description: { contains: term, mode: 'insensitive' } },
+          { tags: { has: term } },
+        ],
+      },
+    });
+
+    if (!results) throw new NotFoundException("We didn't find what you want");
+
+    return results;
+  }
 }
