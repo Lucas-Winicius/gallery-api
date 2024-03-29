@@ -39,9 +39,15 @@ export class GalleryService {
 
   async update(id: string, updateGalleryDto: UpdateGalleryDto) {
     try {
+      const originalPhoto = await this.prisma.photo.findUnique({
+        where: { id },
+      });
+
+      if (!originalPhoto) throw new NotFoundException('Photo not found');
+
       const updatedPhoto = await this.prisma.photo.update({
         where: { id },
-        data: updateGalleryDto,
+        data: { ...originalPhoto, ...updateGalleryDto },
       });
 
       return updatedPhoto;
@@ -70,7 +76,8 @@ export class GalleryService {
     }
   }
 
-  async search(term: string) {
+  async search(query: string) {
+    const term = query.toLocaleLowerCase();
     const results = await this.prisma.photo.findMany({
       where: {
         OR: [

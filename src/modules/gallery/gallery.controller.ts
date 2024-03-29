@@ -6,7 +6,7 @@ import {
   Param,
   Delete,
   UseGuards,
-  Put,
+  Patch,
   Query,
 } from '@nestjs/common';
 import { GalleryService } from './gallery.service';
@@ -39,7 +39,7 @@ export class GalleryController {
     return this.galleryService.findOne(id);
   }
 
-  @Put(':id')
+  @Patch(':id')
   @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() updateGalleryDto: UpdateGalleryDto) {
     return this.galleryService.update(id, updateGalleryDto);
